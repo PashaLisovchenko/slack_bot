@@ -24,12 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7eauj@m%f!3ct9x01v(r&mri27(b4tlpgjc)8hq)d__som+89l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'fc16677f.ngrok.io',
     'localhost',
-    'https://botaskleave.herokuapp.com/',
+    'botaskleave.herokuapp.com',
 ]
 
 CLIENT_ID = '279034026387.279987344278'
@@ -127,7 +127,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-db_from_env = dj_database_url.config()
+# db_from_env = dj_database_url.config()
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
