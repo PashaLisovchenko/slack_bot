@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import dj_database_url
-
+import whitenoise
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,17 +24,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7eauj@m%f!3ct9x01v(r&mri27(b4tlpgjc)8hq)d__som+89l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'fc16677f.ngrok.io',
-    'localhost'
+    'localhost',
+
 ]
 
 CLIENT_ID = '279034026387.279987344278'
 CLIENT_SECRET = 'e80842a01eff13c6016469d3cfb73ed6'
 VERIFICATION_TOKEN = 'YzFlUqEu9FlByQPC7EtmDPRP'
-BOT_TOKEN = 'xoxp-279034026387-279034026595-280993176418-1dd8b430077a8209191eb83447711f63'
+BOT_TOKEN = 'xoxp-279034026387-279034026595-281051819268-bf90135985cf5280f9a80a37891a80d5'
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,12 +83,6 @@ WSGI_APPLICATION = 'slack_bot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -133,8 +128,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE'] = 500
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://guwvdhkwawylpf:7f789972229cb3e01f42b4891166df2feee22d474769d738bb7abd99907ba0ea@ec2-54-235-119-0.compute-1.amazonaws.com:5432/d7jbprt92dg7b3'
+    )
+}
