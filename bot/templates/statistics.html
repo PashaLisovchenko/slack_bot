@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Statistics-{{ team.team_name }}
+{% endblock %}
+
+{% block content %}
+    <table class="statistics">
+        <thead>
+            <tr>
+                <th>author_name</th>
+                <th>channel</th>
+                <th>text</th>
+                <th>create_date</th>
+                <th>is_answered</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in team.ask_messages.all %}
+                <tr>
+                    <td>{{ message.author_name }}</td>
+                    <td>{{ message.channel }}</td>
+                    <td>{{ message.text }}</td>
+                    <td>{{ message.create_date }}</td>
+                    <td>{{ message.is_answered }}</td>
+                </tr>
+                {% for answer in message.answer_messages.all %}
+                    <tr class="answer">
+                        <td>{{ answer.author_id }}</td>
+                        <td></td>
+                        <td>{{ answer.text }}</td>
+                        <td>{{ answer.create_date }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

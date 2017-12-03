@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Workspaces
+{% endblock %}
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <div class="login">
+            <h1>What we've got here is failure to communicate!</h1>
+             <a href="https://slack.com/oauth/authorize?scope=bot&client_id={{ client_id }}" class="nav-link">
+                 Authorization
+             </a>
+        </div>
+        {% else %}
+        <div class="main-info">
+            You are assigned to these commands
+        </div>
+
+        <div class="workspaces">
+            {% for t in team %}
+                <div class="workspace">
+                    <img src="{% static 'img/Slack-logo.png' %}" alt="">
+                    <span>{{ t.team_name }}</span>
+                </div>
+                <div class="btn-space">
+                    {% if request.user == t.admin %}
+                            <a class="btn" href="{% url 'slack:bot_settings' t.slug %}">Settings</a>
+                        {% endif %}
+                            <a class="btn" href="{% url 'slack:bot_statistics' t.slug %}">Statistics</a>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Settings-{{ team.team_name }}
+{% endblock %}
+{% block content %}
+
+    <div class="current-chanel">
+        {% if not active_chanel %}
+            <p>Current channel for sending notifications: <span class="active-chanel">None</span></p>
+            {% else %}
+            <p>Current channel for sending notifications: <span class="active-chanel">{{ active_chanel.chanel_name }}</span></p>
+        {% endif %}
+    </div>
+
+    <div class="channels">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update Active Chanel">
+        </form>
+    </div>
+
+    <div class="moderators">
+        <p>Moderators :</p>
+        {% for m in team.users.all %}
+            {% if not m.is_staff %}
+                <p>{{ m.username }}</p>
+            {% endif %}
+        {% endfor %}
+        <a class="btn" href="{% url 'slack:add_moder' %}">Add moderators</a>
+    </div>
+
+
+{% endblock %}

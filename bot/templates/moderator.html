@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Add Moderator
+{% endblock %}
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Send message" /></p>
+</form>
+{% endblock %}

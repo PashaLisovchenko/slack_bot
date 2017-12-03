@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Slack Bot{% endblock %}</title>
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+<body>
+
+<div id="subheader">
+    <a href="{% url 'slack:list_team' %}" class="logo">Let me go?</a>
+    {% if request.user.is_authenticated %}
+        <span class="user">
+            Hello {{ request.user.username }},
+            you'r {% if request.user.is_staff %} administrator {% else %} moderator {% endif %}
+            <a href="{% url 'slack:logout' %}" class="logout">Logout</a>
+        </span>
+    {% endif %}
+</div>
+
+<div id="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+</body>
+</html>
