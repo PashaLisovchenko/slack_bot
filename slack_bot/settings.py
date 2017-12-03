@@ -29,7 +29,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'fc16677f.ngrok.io',
     'localhost',
-
+    'https://botaskleave.herokuapp.com/',
 ]
 
 CLIENT_ID = '279034026387.279987344278'
